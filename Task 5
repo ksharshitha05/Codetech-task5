@@ -1,0 +1,52 @@
+Task 5: Train-Test Split & Evaluation Metrics
+Dataset: Heart Disease Dataset
+Tool: Python (Scikit-learn)
+ Step 1: Import Required Libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score, confusion_matrix
+ Step 2: Load the Dataset
+data = pd.read_csv("heart.csv")   # use correct file name
+ Step 3: Separate Features and Target
+X = data.drop("target", axis=1)   # features
+y = data["target"]                # label
+ Step 4: Split Data into Train & Test
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+Purpose:
+Training data → used to train the model
+Testing data → used to check model performance on unseen data
+ Step 5: Train Logistic Regression Model
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+ Step 6: Predict on Test Data
+y_pred = model.predict(X_test)
+ Step 7: Calculate Evaluation Metrics
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+ Step 8: Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:\n", cm)
+Confusion Matrix Explanation:
+True Positive (TP): Correctly predicted disease
+True Negative (TN): Correctly predicted no disease
+False Positive (FP): Predicted disease but no disease
+False Negative (FN): Missed disease prediction
+ Step 9: Interpret Results 
+The Logistic Regression model was trained using training data and evaluated on test data.
+Accuracy shows overall correctness of the model.
+Precision indicates how many predicted positives are actually correct.
+Recall shows how many actual positives are correctly identified.
+The confusion matrix helps understand correct and incorrect predictions.
+Final Outcome
+This task helps understand:
+Train vs Test split
+Model training
+Evaluation metrics
+Confusion matrix interpretation
